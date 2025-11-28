@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Finalizar Compra - Projeto</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+    <div class="container">
+        <a href="index.html" class="logo">Logo</a>
+        <button id="nav-toggle" aria-label="Abrir menu">☰</button>
+        <nav id="site-nav" class="site-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li>
+                    <a href="carrinho.html" id="cart-link" aria-label="Carrinho">
+                        Carrinho 🛒 <span id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <main>
+        <section class="container">
+            <h1>Finalizar Compra</h1>
+            <p>Por favor, preencha seus dados para a entrega.</p>
+            
+            <form id="contact-form">
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Dados de Entrega</legend>
+                    <div class="form-group">
+                        <label for="cep">CEP:</label>
+                        <input type="text" id="cep" name="cep" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endereco">Endereço:</label>
+                        <input type="text" id="endereco" name="endereco" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numero">Número:</label>
+                        <input type="text" id="numero" name="numero" required>
+                    </div>
+                </fieldset>
+                
+                <button type="submit" class="btn-submit">Finalizar Pedido</button>
+            </form>
+        </section>
+    </main>
+    
+    <script src="./js/scripts.js" type="module"></script>
+</body>
+</html>
