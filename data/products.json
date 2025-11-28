@@ -1,0 +1,30 @@
+[
+  {
+    "id": "p-001",
+    "nome": "Smartphone Z-100",
+    "descricao": "Câmera de 108MP, 256GB de armazenamento e tela Super AMOLED.",
+    "preco": 2499.90,
+    "imagem": "https://placehold.co/400x400/206cb6/ffffff?text=Smartphone+Z-100"
+  },
+  {
+    "id": "p-002",
+    "nome": "Notebook Ultra Pro",
+    "descricao": "Processador Core i7, 16GB RAM, SSD 1TB. Ideal para alto desempenho.",
+    "preco": 5200.00,
+    "imagem": "https://placehold.co/400x400/ed8936/ffffff?text=Notebook+Pro"
+  },
+  {
+    "id": "p-003",
+    "nome": "Fone de Ouvido MaxSound",
+    "descricao": "Cancelamento de ruído ativo e 30 horas de bateria.",
+    "preco": 799.50,
+    "imagem": "https://placehold.co/400x400/18202c/ffffff?text=Fone+MaxSound"
+  },
+  {
+    "id": "p-004",
+    "nome": "Smartwatch V8",
+    "descricao": "Monitoramento cardíaco, GPS integrado e à prova d'água.",
+    "preco": 1150.00,
+    "imagem": "https://placehold.co/400x400/206cb6/ffffff?text=Smartwatch+V8"
+  }
+]

@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open sobre.html",
+            "file": "c:\\Users\\leo15\\Documents\\projeto-final\\sobre.html"
+        }
+    ]
+}

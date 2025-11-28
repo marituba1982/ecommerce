@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Sistema de Comércio Eletrônico Didático — Implementação com PHP, PDO e MySQL</title>
+	<meta name="generator" content="LibreOffice 25.2.6.2 (Windows)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2025-11-27T21:51:58.704600700"/>
+	<meta name="" content=""/>
+	<style type="text/css">
+		@page { size: 21cm 29.7cm; margin-left: 2cm; margin-right: 1cm; margin-top: 1cm; margin-bottom: 1cm }
+		p { line-height: 115%; font-family: "Arial", sans-serif; text-align: justify; margin-left: 3cm; margin-right: 2.5cm; margin-bottom: 0.25cm; background: transparent }
+		h1 { text-transform: uppercase; margin-left: 3cm; margin-right: 2.5cm; margin-bottom: 0.21cm; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Serif", serif; font-weight: bold; font-size: 18pt }
+		h1.cjk { font-size: 18pt; font-family: "NSimSun"; font-weight: bold }
+		h1.ctl { font-family: "Arial"; font-size: 18pt; font-weight: bold }
+		h2 { margin-left: 3cm; margin-right: 2.5cm; margin-top: 0.35cm; margin-bottom: 0.21cm; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Serif", serif; font-weight: bold; font-size: 14pt }
+		h2.cjk { font-size: 14pt; font-family: "NSimSun"; font-weight: bold }
+		h2.ctl { font-family: "Arial"; font-size: 14pt; font-weight: bold }
+		p.keywords { font-style: italic }
+	</style>
+</head>
+<body lang="pt-BR" link="#000080" vlink="#800000" dir="ltr"><h1 class="western" align="center" style="margin-right: 0cm; margin-left: 0cm; margin-top: 6cm; margin-bottom: 0.25cm">
+Sistema de Comércio Eletrônico Didático — Implementação com
+PHP, PDO e MySQL</h1>
+<p align="center" style="margin-right: 0cm; margin-top: 6cm; margin-left: 0cm">
+Grupo Projeto Final<br/>
+Andreivy M.Rodrigues | Vivian Belo da Silva
+| Leonardo Bruno Ferreira de Almeida</p>
+<p align="center" style="margin-right: 0cm; margin-top: 6cm; margin-left: 0cm">
+<font size="3" style="font-size: 12pt">Face Wyden / Curso de Ciências
+da Computação<br/>
+Belém/PA — 2025</font></p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">Resumo</h2>
+<p>Este artigo descreve o projeto, a implementação e a avaliação
+de um sistema de comércio eletrônico didático desenvolvido com
+tecnologias web tradicionais: HTML5, CSS3, JavaScript e PHP com
+integração ao banco de dados MySQL via PDO. O sistema implementa
+funcionalidades essenciais de um e-commerce, incluindo cadastro e
+gerenciamento de produtos (CRUD), catálogo dinâmico, carrinho de
+compras baseado em sessão, finalização de pedido, e persistência
+transacional dos pedidos. A abordagem privilegia boas práticas de
+segurança, como uso de prepared statements e transações, e busca
+demonstrar a integração entre camadas front-end e back-end de forma
+responsiva e navegável.</p>
+<p class="keywords">Palavras-chave: comércio eletrônico; PHP; PDO;
+MySQL; CRUD; segurança; ABNT.</p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">1
+Introdução</h2>
+<p>O crescimento do comércio eletrônico exige sistemas confiáveis,
+seguros e fáceis de manter. Este trabalho apresenta o
+desenvolvimento de um protótipo de loja virtual com foco didático,
+cujo objetivo principal é consolidar conhecimentos sobre integração
+entre aplicações web e um Sistema de Gerenciamento de Banco de
+Dados (SGBD). A implementação destaca a utilização da classe PDO
+do PHP para acesso ao banco MySQL, práticas de segurança (prepared
+statements), e a composição de um fluxo completo de compra (do
+cadastro de produtos à gravação de pedidos).</p>
+<h2 class="western">1.1 Objetivos</h2>
+<p>- Projetar e implementar um sistema de e-commerce funcional, com
+persistência de dados e operações CRUD para produtos.<br/>
+-
+Garantir a segurança das operações de banco (prevenção de SQL
+injection) e a integridade dos dados via transações.<br/>
+-
+Demonstrar a integração entre frontend (HTML/CSS/JS) e backend
+(PHP/PDO), com interfaces responsivas.</p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">2
+Desenvolvimento — Metodologia e Tecnologias</h2>
+<h2 class="western">2.1 Metodologia</h2>
+<p>A metodologia adotada foi incremental e orientada por
+funcionalidades: inicialmente modelou-se o banco de dados relacional
+com tabelas para produtos, pedidos e itens de pedido; em seguida
+implementou-se camadas de acesso a dados (DAO simples via PDO),
+endpoints para operações do carrinho e controle administrativo
+(CRUD de produtos), além das interfaces HTML/CSS/JS para interação
+do usuário. O teste foi realizado manualmente em ambiente local
+(XAMPP/LAMP) com dados de amostra.</p>
+<h2 class="western">2.2 Tecnologias utilizadas</h2>
+<p>- PHP (&gt;= 7.4): linguagem de servidor, gerenciamento de sessões
+e execução lógica do negócio.<br/>
+- PDO (PHP Data Objects):
+camada de acesso a dados com suporte a prepared statements e
+tratamento de exceções.<br/>
+- MySQL/MariaDB: SGBD relacional para
+persistência de produtos, pedidos e itens de pedidos.<br/>
+- HTML5,
+CSS3: marcação semântica e estilo responsivo conforme práticas
+modernas.<br/>
+- JavaScript: comportamento no lado do cliente —
+atualização do carrinho, navegação e pequena UX.</p>
+<h2 class="western">2.3 Estrutura do banco de dados</h2>
+<p>O esquema contém as tabelas principais: products (id, sku, nome,
+descricao, preco, imagem, created_at); orders (id, nome_cliente,
+email, endereco, total, status, created_at) e order_items (id,
+order_id, product_id, nome, quantidade, preco). O DB foi criado
+conforme script SQL (arquivo data/db.sql) e os dados iniciais foram
+semeados a partir de um arquivo JSON (data/products.json).</p>
+<h2 class="western">2.4 Boas práticas de segurança e arquitetura</h2>
+<p>- Uso de prepared statements (PDO::prepare) para todas as
+consultas que recebem parâmetros do usuário, prevenindo SQL
+injection.<br/>
+- Configuração de PDO para lançar exceções
+(ERRMODE_EXCEPTION) e retorno em modo associativo (FETCH_ASSOC).<br/>
+-
+Utilização de transações para o registro de pedidos e itens
+relacionados, garantindo atomicidade.<br/>
+- Separação simples
+entre templates (layouts) e lógica; em versão futura recomenda-se
+introduzir camada de serviços e autenticação.</p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">3
+Descrição das páginas e funcionalidades</h2>
+<h2 class="western">3.1 Catálogo de Produtos (index.php)</h2>
+<p>Página dinâmica que exibe produtos do banco de dados. Para cada
+item, o usuário pode escolher quantidade e adicionar ao carrinho. A
+listagem é efetuada por consulta SELECT com PDO.</p>
+<h2 class="western">3.2 Carrinho (carrinho.php +
+php/cart_actions.php)</h2>
+<p>Estrutura de carrinho em sessão; operações possíveis:
+adicionar, atualizar quantidade, remover. cart_actions.php recebe
+ações via POST e manipula $_SESSION['cart'].</p>
+<h2 class="western">3.3 Checkout (checkout.php, php/place_order.php)</h2>
+<p>Ao confirmar o pedido, o servidor grava o cabeçalho do pedido em
+orders e, dentro de uma transação, persiste cada item em
+order_items. Após commit, o carrinho de sessão é limpo.</p>
+<h2 class="western">3.4 Área Administrativa (php/admin/*)</h2>
+<p>Interface para gerenciamento de produtos, com os formulários de
+criação e edição, e a listagem para exclusão. Todas as entradas
+administrativas são validadas e persistidas com prepared statements.</p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">4
+Resultados — Demonstração do sistema em funcionamento</h2>
+<h2 class="western">4.1 Cenário demonstrativo</h2>
+<p>- Inicialização: script php/init_db.php cria o schema e popula
+produtos de exemplo.<br/>
+- Fluxo do usuário: navegar no catálogo
+(index.php), adicionar produtos ao carrinho, alterar quantidades em
+carrinho.php, finalizar compra em checkout.php e observar a gravação
+em orders/order_items.<br/>
+- Administração: criar/editar/excluir
+produtos via php/admin/products_* e verificar impacto imediato no
+catálogo.</p>
+<p>A implementação permitiu compreender na prática a integração
+entre front-end e back-end e a responsabilidade do SGBD em garantir
+persistência e integridade. O uso de PDO e prepared statements
+mostrou-se simples e eficaz para mitigar riscos de injeção SQL. A
+experiência também evidenciou pontos de melhoria: implementação
+de autenticação e controle de acesso, proteção CSRF para
+operações por formulário, validação de imagens e uploads
+seguros, além de testes automatizados.</p>
+<h2 class="western">5.1 Perspectivas de melhoria</h2>
+<p>- Inserir autenticação por perfis (administrador / cliente) e
+controle de permissões.<br/>
+- Implementar proteção CSRF em
+formulários.<br/>
+- Implementar upload e armazenamento seguro de
+imagens (server-side validation, sanitização e armazenamento em
+blob ou object storage).<br/>
+- Adicionar testes automatizados
+(PHPUnit para backend; Playwright/Cypress para testes end&#8209;to&#8209;end).</p>
+<h2 class="western" style="margin-right: 0cm; margin-left: 0cm">Referências</h2>
+<ol>
+	<li><p style="margin-bottom: 0cm">ASSOCIAÇÃO BRASILEIRA DE NORMAS
+	TÉCNICAS. NBR 14724:2011 — Informação e documentação —
+	Trabalhos acadêmicos — Apresentação. Rio de Janeiro: ABNT,
+	2011. 
+	</p></li>
+	<li><p style="margin-bottom: 0cm">PHP: THE RIGHT WAY. PHP: The Right
+	Way. Disponível em: &lt;https://phptherightway.com/&gt;. Acesso em:
+	27 nov. 2025. 
+	</p></li>
+	<li><p style="margin-bottom: 0cm">PHP MANUAL. PDO — PHP Data
+	Objects. Disponível em:
+	&lt;https://www.php.net/manual/pt_BR/book.pdo.php&gt;. Acesso em: 27
+	nov. 2025. 
+	</p></li>
+	<li><p style="margin-bottom: 0cm">ORACLE CORPORATION. MySQL 8.0
+	Reference Manual. Disponível em: &lt;https://dev.mysql.com/doc/&gt;.
+	Acesso em: 27 nov. 2025. 
+	</p></li>
+	<li><p>MOZILLA. MDN Web Docs — HTML, CSS e JavaScript. Disponível
+	em: &lt;https://developer.mozilla.org/&gt;. Acesso em: 27 nov. 2025.
+		</p></li>
+</ol>
+</body>
+</html>
